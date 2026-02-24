@@ -1,0 +1,40 @@
+.subHeaderContainer_Table {
+  display: flex;
+  max-width: 100%;
+  width: 100%;
+  gap: 0.25rem;
+  padding: 1.25rem 0;
+  margin: 0;
+  justify-content: flex-end;
+}
+
+.reportButton {
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  line-height: 16px;
+  border: 2px solid var(--baseColor);
+  background-color: transparent;
+  padding: 0 1rem;
+
+  & > svg {
+    fill: var(--baseColor);
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: var(--bg-hover-button);
+    fill: var(--baseColor);
+  }
+}
+.reportButton:focus {
+  border: 2px solid var(--baseColor);
+}
+
+.customPositionAlert {
+  font-size: 0.9rem;
+  margin-right: auto;
+}

@@ -1,0 +1,55 @@
+.sidebarContent {
+  width: 100%;
+  height: 100%;
+}
+
+.userDataInfo {
+  display: flex;
+  padding: 1rem;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 1.5rem 0 0 1.5rem;
+  background-color: var(--white-color);
+  & > :first-child {
+    width: 3.125rem;
+    height: 3.125rem;
+    font-size: 1.563rem;
+    padding: 0.4rem 0.55rem 0.4rem;
+    font-weight: 400;
+    text-align: center;
+    margin: 1.5rem auto;
+    border-radius: 50%;
+    color: var(--white-color);
+    font-family: var(--poppins-light);
+    background-color: var(--baseColor);
+  }
+}
+
+.sideTab {
+  opacity: .5;
+  padding: 1rem;
+  display: block;
+  cursor: pointer;
+  margin: 0.2rem 0;
+  border-radius: 1.5rem 0 0 1.5rem;
+  background-color: var(--white-color);
+}
+.sideTab:hover { opacity: 0.75; }
+
+.sideTabButton {
+  all: unset;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > :first-child{ margin-right: 1rem; }
+  & > :nth-child(2) { font-size: 0.8rem; }
+  & > :last-child { margin-left: auto; }
+}
+
+.activeSideTab {
+  background-color: var(--bg-hover-button);
+  opacity: 1;
+}
+.activeSideTab:hover { opacity: 1; }

@@ -1,0 +1,204 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 30%;
+}
+
+.inputLabel {
+  color: var(--baseColor);
+  font-size: 0.875rem;
+  max-width: 100%;
+}
+
+.inputField {
+  display: flex;
+  align-items: center;
+  border: unset;
+  border-bottom: 2px solid var(--baseColor);
+  background-color: var(--white-color);
+  outline: 0;
+  gap: 0.7rem;
+  height: 30px;
+  width: 100%;
+
+  &:focus-within {
+    border-color: var(--baseColor);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+    border-radius: 4px;
+  }
+}
+
+.fielded {
+  height: 100%;
+  font-size: 0.875rem;
+  color: var(--baseColor);
+  width: 100%;
+  white-space: nowrap;
+  overflow: unset;
+  text-overflow: ellipsis;
+  border: unset;
+  padding: 0;
+  background-color: transparent;
+  font-family: var(--popping-regular);
+
+  &:focus,
+  &:focus-within,
+  &:focus-visible {
+    box-shadow: unset;
+    background-color: transparent;
+    outline: none;
+  }
+}
+.fielded:disabled {
+  color: var(--gray-font)
+}
+
+
+.selectWrap {
+  position: relative;
+  width: 100%;
+  flex: 0 0 50%;
+  max-width: 100%;
+  margin: 1rem 0;
+}
+
+.periodSelect {
+  appearance: none !important;
+}
+
+.selectField, ::picker(select) {
+  -moz-appearance: base-select;
+  -webkit-appearance: base-select;
+  appearance: base-select;
+}
+.selectField::picker-icon {
+  color: #000;
+  transition: 0.4s transform;
+}
+.selectField:open::picker-icon {
+  transform: rotate(180deg);
+}
+
+.selectField {
+  border: none;
+  border-bottom: 2px solid #0000001f;
+  border-radius: 0;
+  color: var(--black-color);
+  background-color: var(--white-color);
+  display: block;
+  font-size: 1rem;
+  font-weight: 300;
+  height: 100%;
+  width: 100%;
+  line-height: inherit;
+  word-wrap: normal;
+  margin: 0;
+  font-family: var(--popping-regular);
+}
+.selectField:focus,
+.selectField:focus-within,
+.selectField:focus-visible {
+  background-color: var(--white-color);
+  outline: none;
+}
+
+.selectField option {
+  -webkit-font-family: var(--poppins-regular) !important;
+  -moz-font-family: var(--poppins-regular) !important;
+  font-family: var(--poppins-regular) !important;
+  padding: 0.1rem 0.5rem;
+}
+
+.selectField option::checkmark {
+  display: none;
+}
+
+.selectLabelCustom {
+  display: inline-block;
+  max-width: 100%;
+  font-weight: bold;
+  word-wrap: break-word;
+  cursor: pointer;
+  bottom: .3rem;
+  margin-bottom: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: all .3s ease;
+  font-family: var(--popping-regular);
+}
+
+.selectField:invalid~label {
+  color: var(--gray-font);
+  font-size: .8rem;
+  transform: translateY(1);
+}
+.selectField:open~label {
+  color: var(--baseColor);
+  font-size: .8rem;
+  transform: translateY(-1.5rem);
+}
+.selectField:valid~label {
+  color: var(--baseColor);
+  font-size: .8rem;
+  transform: translateY(-1.5rem);
+  font-family: var(--popping-regular);
+}
+.selectField:valid {
+  border-bottom: 2px solid var(--baseColor);
+}
+.paddingAdded {
+  padding: 0.5rem;
+}
+
+.selectFieldNormal {
+  -moz-appearance: auto;
+  -webkit-appearance: auto;
+  appearance: auto;
+  border: none;
+  border-bottom: 2px solid #0000001f;
+  border-radius: 0;
+  color: var(--black-color);
+  background-color: var(--white-color);
+  display: block;
+  font-size: 1rem;
+  font-weight: 300;
+  height: 100%;
+  width: 100%;
+  line-height: inherit;
+  word-wrap: normal;
+  margin: 0;
+  font-family: var(--popping-regular);
+}
+.selectFieldNormal:focus,
+.selectFieldNormal:focus-within,
+.selectFieldNormal:focus-visible {
+  background-color: var(--white-color);
+  outline: none;
+}
+
+.selectFieldNormal option {
+  -webkit-font-family: var(--poppins-regular) !important;
+  -moz-font-family: var(--poppins-regular) !important;
+  font-family: var(--poppins-regular) !important;
+  padding: 0.1rem 0.5rem;
+}
+.selectFieldNormal:invalid~label {
+  color: var(--gray-font);
+  font-size: .8rem;
+  transform: translateY(1);
+}
+.selectFieldNormal:open~label {
+  color: var(--baseColor);
+  font-size: .8rem;
+  transform: translateY(-1.5rem);
+}
+.selectFieldNormal:valid~label {
+  color: var(--baseColor);
+  font-size: .8rem;
+  transform: translateY(-1.5rem);
+  font-family: var(--popping-regular);
+}
+.selectFieldNormal:valid {
+  border-bottom: 2px solid var(--baseColor);
+}

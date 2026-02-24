@@ -1,0 +1,69 @@
+.inputFileContainer {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.customFileUpload {
+  z-index: 2;
+  opacity: 0;
+  width: 100%;
+  margin: auto;
+  line-height: 2;
+  cursor: pointer;
+  position: relative;
+  height: calc(2.25rem + 2px);
+}
+.customFileUpload:disabled { cursor: default; pointer-events: none; }
+.customFileUpload:disabled+label {opacity: 0.5;}
+
+.inputCustomLabel {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 2.25rem;
+  line-height: 2;
+  cursor: pointer;
+  font-size: .8rem;
+  margin-bottom: 0;
+  font-weight: bold;
+  position: absolute;
+  pointer-events: none;
+  border-radius: .25rem;
+  word-wrap: break-word;
+  display: inline-block;
+  color: var(--gray-font);
+  padding: .375rem .75rem;
+  transition: all .3s ease;
+  background-color: var(--white-color);
+  border: 1px solid var(--border-normal);
+}
+.inputCustomLabel::after {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  line-height: 2;
+  display: block;
+  content: "Buscar";
+  position: absolute;
+  padding: .3rem .75rem;
+  color: var(--white-color);
+  border-radius: 0 .25rem .25rem 0;
+  background-color: var(--baseColor);
+  border-left: 1px solid var(--gray-font);
+}
+.inputCustomLabel::after:hover {
+  opacity: 0.5;
+}
+
+.inputCustomSubLabel {
+  margin: 0;
+  padding: 0;
+  font-size: .7rem;
+  color: var(--gray-font);
+  margin: 0.5rem 0 1.9rem;
+}

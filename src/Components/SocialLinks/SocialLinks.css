@@ -1,0 +1,75 @@
+.pa_audit_socialsContainer {
+  display: flex;
+  position: fixed;
+  max-width: 100%;
+  width: fit-content;
+  gap: 1.5rem;
+	bottom: 25px;
+	left: 60px;
+  z-index: 9;
+  background: transparent;
+}
+
+.pa_audit_iconsSocial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white-color);
+  border: 2px solid transparent;
+  margin: 0;
+  padding: 0;
+  width: auto;
+	height: auto;
+	border-radius:50px;
+	box-shadow: 2px 2px 3px var(--gray-font);
+}
+
+.pa_audit_social_icon {
+  max-width: 100%;
+  float: left;
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: fill;
+}
+
+.pa_audit_socials_tooltip {
+  display: inline-block;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  font-size: 0.65rem;
+  text-align: center;
+  background: transparent;
+  color: var(--white-color);
+  border: 1px solid var(--white-color);
+  padding: 0.25rem 0;
+  margin: 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.7rem 0.7rem rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.pa_audit_socials_tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  bottom: -4px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.pa_audit_iconsSocial:hover .pa_audit_socials_tooltip {
+  top: -55px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+svg:hover span,
+svg:hover .pa_audit_socials_tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}

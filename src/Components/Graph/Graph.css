@@ -1,0 +1,96 @@
+.marginGraph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+}
+
+.dataSection {
+  display: flex;
+  width: 75%;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.alertPadding {
+  padding: 2rem 1rem;
+}
+
+.shadowBoxAdd {
+  align-self: center;
+  padding: 0.25rem;
+  box-shadow: -1px 1px 4px var(--bg-shadow-box) ;
+}
+
+.buttonSample {
+  padding: 0.25rem 0.5rem;
+  text-decoration: underline;
+}
+
+.textBold {
+  font-weight: bold;
+}
+
+.customToolTipStyle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: rgba(249, 252, 255, 0.95);
+  border-radius: 0.25rem;
+  color: var(--gray-font);
+}
+
+.defaultColor {
+  border: 1px solid var(--font-blue-light);
+  fill: var(--font-blue-light);
+  stroke: var(--font-blue-light);
+  & > :first-child {
+    color: var(--font-blue-light);
+  }
+}
+
+.pendingColor {
+  border: 1px solid var(--font-yellow-light);
+  fill: var(--font-yellow-light);
+  stroke: var(--font-yellow-light);
+  & > :first-child {
+    color: var(--font-yellow-light);
+  }
+}
+
+.processColor {
+  border: 1px solid var(--font-blue-normal);
+  fill: var(--font-blue-normal);
+  stroke: var(--font-blue-normal);
+  & > :first-child {
+    color: var(--font-blue-normal);
+  }
+}
+
+.errorColor {
+  border: 1px solid var(--font-red-normal);
+  fill: var(--font-red-normal);
+  stroke: var(--font-red-normal);
+  & > :first-child {
+    color: var(--font-red-normal);
+  }
+}
+
+.successColor {
+  border: 1px solid var(--font-green-light);
+  fill: var(--font-green-light);
+  stroke: var(--font-green-light);
+  & > :first-child {
+    color: var(--font-green-light);
+  }
+}
+
+.imgReplaceSize {
+  width: 18px;
+  height: 18px;
+  margin-left: 0.25rem;
+  align-self: center;
+}

@@ -1,0 +1,38 @@
+.typoContent {
+  line-height: normal;
+  padding: 0.1rem;
+}
+
+.type_normal {
+  font-family: var(--poppins-regular);
+  font-weight: normal;
+  font-style: normal;
+}
+
+.type_italic {
+  font-family: var(--poppins-italic), var(--poppins-light-italic);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.type_bold {
+  font-family: var(--poppins-bold);
+  font-weight: bold;
+}
+
+.type_light {
+  font-family: var(--poppins-light);
+  font-weight: lighter;
+}
+
+.md {
+  font-size: 1rem;
+}
+
+.sm {
+  font-size: 0.75rem;
+}
+
+.lg {
+  font-size: 1.25rem;
+}

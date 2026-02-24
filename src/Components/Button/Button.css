@@ -1,0 +1,115 @@
+.generalButton {
+  cursor: pointer;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: .25rem;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.generalButton:hover{
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+.disabled:hover {
+  opacity: 0.5;
+  transform: scale(1);
+  cursor: default;
+}
+
+.linkedButton {
+  cursor: pointer;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: .25rem;
+  display: inline-block;
+  vertical-align: middle;
+  color: var(--baseColor)
+}
+
+.size_sm {
+  font-size: .875rem;
+  padding: .25rem .5rem;
+}
+
+.size_md {
+  font-size: 1rem;
+  padding: .375rem 0.75rem;
+}
+
+.size_lg {
+  font-size: 1.25rem;
+  padding: .5rem 1rem;
+}
+
+.button_primary {
+  color: var(--white-color);
+  background-color: var(--baseColor);
+}
+
+.button_outline-primary {
+  color: var(--baseColor);
+  background-color: transparent;
+  border-color: var(--baseColor);
+}
+
+.button_secondary {
+  color: var(--font-success);
+  background-color: var(--bg-alert-success);
+}
+
+.button_outline-secondary {
+  color: var(--font-success);
+  background-color: transparent;
+  border-color: var(--border-success);
+}
+
+.button_warning {
+  color: var(--font-warning);
+  background-color: var(--bg-alert-warning);
+}
+
+.button_outline-warning {
+  color: var(--font-warning);
+  background-color: transparent;
+  border-color: var(--border-warning);
+}
+
+.button_danger {
+  color: var(--font-danger);
+  background-color: var(--bg-alert-danger);
+}
+
+.button_outline-danger {
+  color: var(--font-danger);
+  background-color: transparent;
+  border-color: var(--border-danger);
+}
+
+.button_outline-primary:hover {
+  background-color: var(--bg-hover-button);
+}
+
+.button_outline-secondary:hover {
+  background-color: var(--bg-alert-success);
+}
+
+.button_outline-danger:hover {
+  background-color: var(--bg-alert-danger);
+}
+
+.button_outline-warning:hover {
+  background-color: var(--bg-alert-warning);
+}

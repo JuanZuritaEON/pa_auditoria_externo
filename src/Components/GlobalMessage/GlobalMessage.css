@@ -1,0 +1,4 @@
+.contentError {
+  display: flex;
+  flex-direction: column;
+}

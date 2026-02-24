@@ -1,0 +1,153 @@
+.consultsContent {
+  width: 100%;
+  display: grid;
+  column-gap: 1.25rem;
+  grid-template-columns: 65% 33%;
+}
+
+.figsButtons {
+  width: 100%;
+  height: auto;
+  gap: 0.15rem;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.singleFigButton {
+  width: 100%;
+  height: auto;
+  display: grid;
+  padding: 0.25rem 0.5rem;
+  align-items: center;
+  color: rgb(11, 26, 40);
+  grid-template-columns: 15% 1fr auto;
+  background-color: rgb(247, 247, 247);
+  position: relative;
+}
+.iconMargin {
+  margin: auto
+}
+.textStyles {
+  text-align: left;
+  text-transform: uppercase;
+  white-space: normal;
+  font-family: var(--poppins-regular);
+}
+.figureStyle {
+  text-align: center;
+  margin: 0 auto;
+}
+.singleFigButton:hover {
+  transform: scale(1);
+  opacity: 0.6;
+}
+.upButtonEdges {
+  border-radius: 10px 10px 0 0;
+}
+.bottomButtonEdges {
+  border-radius: 0 0 10px 10px;
+}
+.stylePending { color: var(--graph_color_1) }
+.styleDelivered { color: var(--graph_color_2) }
+.styleRejected { color: var(--graph_color_3) }
+.styleAudit { color: var(--graph_color_4) }
+.specialCustomButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  border: none;
+  background: transparent;
+  & > span {
+    margin-top: 0.25rem;
+    margin-left: 0.2rem;
+  }
+}
+.specialCustomButton:focus{ outline: none; }
+.fileUploadLabel {
+  color: var(--baseColor);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.fileUploadLabel:hover{
+  opacity: 0.8;
+  text-decoration: none;
+}
+.documentValid { color: var(--font-green-light) }
+.fileUploadedModalWindow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: auto;
+  width: 100%;
+  height: auto;
+  padding: 1.25rem 0.75rem;
+  position: inherit;
+}
+.visorOnly {
+  width: 75dvw;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.dictamenButton {
+  gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  justify-content: center;
+  color: var(--font-green-light);
+  background-color: transparent;
+  margin-top: 2.5rem;
+  align-self: center;
+  padding: 0.25rem;
+  box-shadow: -1px 1px 4px var(--bg-shadow-box) ;
+  padding: 0.25rem 0.5rem;
+  text-decoration: underline;
+  & > svg {
+    color: var(--graph_color_1)
+  }
+}
+.customFileAlert {
+  margin: 2rem;
+  padding: 2rem 1rem;
+}
+
+.downloadModalFile {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  line-height: 1rem;
+  border-radius: 0.75rem;
+  gap: 1rem;
+  margin: 3.5rem;
+  padding: 1.5rem 1rem;
+  background-color: var(--font-green-light);
+  & > svg { width: 3rem; height: 3rem; }
+}
+
+.alertFileError {
+  all: unset;
+  margin: 3rem;
+  padding: 2rem;
+  display: flex;
+  font-size: 1rem;
+  width: fit-content;
+  align-items: center;
+  border-radius: 0.3rem;
+  justify-content: flex-start;
+}
+
+.specialConsult {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 1rem 3rem;
+}

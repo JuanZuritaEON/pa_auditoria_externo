@@ -1,0 +1,18 @@
+.resultsContent {
+  width: 100%;
+  padding: 1.5rem;
+  background-color: var(--white-color);
+  & > :first-child {
+    padding: 0.5rem 1rem;
+    font-weight: normal;
+    color: var(--white-color);
+    border-radius: 20px 20px 0 0;
+    background-color: var(--baseColor);
+  }
+}
+
+.resultTitle {
+  display: flex;
+  width: 100%;
+  padding: 0.25rem 0;
+}

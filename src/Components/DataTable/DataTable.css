@@ -1,0 +1,33 @@
+.rdt_Pagination {
+  position: unset;
+}
+
+.rdt_TableCol_Sortable {
+  all: unset;
+  font-size: 0.75rem;
+  color: var(--white-color);
+  display: flex;
+  & > div { white-space: normal }
+}
+
+.rdt_TableCell div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.expandRow div {
+  white-space: normal;
+  font-size: 0.7rem;
+}
+
+.normalRow div {
+  white-space: nowrap;
+}
+
+.noInfoComp {
+  margin: 2rem auto;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.25rem;
+  text-align: center;
+}
