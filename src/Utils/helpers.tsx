@@ -20,7 +20,7 @@ export const dateTransform = (date: Date) => {
 const convertToMonth = (value: string) => {
   let letra;
   const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-  const numberMonth = parseInt(value);
+  const numberMonth = Number.parseInt(value);
   if(numberMonth >= 1  && numberMonth <= 12 ) {
     letra = months[numberMonth - 1];
   };
@@ -143,7 +143,7 @@ export const downloadFile: DownloadFile = ({
 
   link.click()
 
-  document.body.removeChild(link)
+  link.remove()
 
   URL.revokeObjectURL(href)
 }
@@ -153,7 +153,7 @@ export const getInitials = (userName: string) => {
   if(userName === '') return 'LI';
   const [name, ...rest] = userName.split(/\s+/)
   const firstName = name.slice(0, 1)
-  const lastName = rest[rest.length - 1]?.slice(0,1) || ''
+  const lastName = rest.at(-1)?.slice(0,1) || ''
   return `${firstName}${lastName}`.toUpperCase().trim()
 }
 export const formatNumber = new Intl.NumberFormat('en-US')
@@ -174,8 +174,8 @@ export const getIconPerStatus = (status: string, text?: boolean) => {
     default: return Denied;
   }
 }
-export const getHasFileText = (hasFile: boolean) => !hasFile ? 'Subir documento' : 'Documento enviado'
-export const getFileIcons = (hasFile: boolean) => !hasFile ? Update : Success
+export const getHasFileText = (hasFile: boolean) => hasFile ? 'Documento enviado' : 'Subir documento'
+export const getFileIcons = (hasFile: boolean) => hasFile ? Success : Update
 export const fileValidations = (
   file: File,
   maxSize: any,
@@ -185,7 +185,7 @@ export const fileValidations = (
   const fileSize = file.size / 1024
   const nameSplit = file.name.split('.')
   const formattedName = nameSplit.length > 2 
-  ? `${nameSplit.slice(0, nameSplit.length - 1).join('')}.${nameSplit.pop()}` : file.name
+  ? `${nameSplit.slice(0, - 1).join('')}.${nameSplit.pop()}` : file.name
   const fileExt = formattedName.split('.')[1].toLowerCase()
   let thereIsError = false
   if (!acceptedExtensions.includes(`.${fileExt}`)){
@@ -218,11 +218,6 @@ const obtainedPartsArray = (fileSize: number, optimalChunkSize: number, minPartS
     const remainingBytes = fileSize - uploadedBytes
 
     if (remainingBytes < optimalChunkSize) currentPartSize = remainingBytes
-
-/*     if (currentPartSize < minPartSize && parts.length > 0) {
-      parts[parts.length - 1] += currentPartSize
-      break
-    } */
 
     parts.push(currentPartSize)
     uploadedBytes += currentPartSize
@@ -329,6 +324,6 @@ export const getBrowser = () => {
 
 export const cleanPhoneData = (phone: string = '+5227-12-25-03-94') => {
   const noHyphens = phone.split('-').join('')
-  const cleanString = noHyphens.slice(noHyphens.length - 10, noHyphens.length)
+  const cleanString = noHyphens.slice(- 10, noHyphens.length)
   return cleanString
 }

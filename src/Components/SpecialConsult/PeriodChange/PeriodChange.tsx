@@ -18,7 +18,7 @@ const PeriodChange = (props: PeriodsChangeProps) => {
       dispatch(SAVE_APP_FLUX({ generalLoader: true }))
       const { data, isSuccess, isError, error } = await dispatch(requestChangePeriod.initiate({
         numeroOtorgante: numOtorgante,
-        nuevoPeriodo: parseInt(newPeriod.slice(0.1)),
+        nuevoPeriodo: Number.parseInt(newPeriod.slice(0.1)),
         userId: userID
       }))
       if (isSuccess) {
@@ -33,7 +33,7 @@ const PeriodChange = (props: PeriodsChangeProps) => {
           position: 'bottom-right'
         })
         if (data.changeCorrect) {
-          setTimeout(() => window.location.reload(), 4000)
+          setTimeout(() => globalThis.location.reload(), 4000)
         } else dispatch(SAVE_APP_FLUX({ generalLoader: false }))
       }
       if (isError) {

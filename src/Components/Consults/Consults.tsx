@@ -73,12 +73,13 @@ const Consults = () => {
       value
     }]
   }
-  const controlFigsUpdated = figsArray.slice(2, figsArray.length - 1).map((fig, index) => ({
+  const controlFigsUpdated = figsArray.slice(2, -1).map((fig, index) => ({
     name: Titles[index],
     value: fig.value
   }))
 
   const handleModalInfo = (cdc: string) => {
+    setDictamenRec({ dictamenName: '', dataBase64: '' })
     setAuditType('')
     setFile(null)
     setCdcNumber(cdc)
@@ -143,15 +144,13 @@ const Consults = () => {
             type: 'warning',
             closeTimer: 5000,
           })
-          if (inputRef.current) inputRef.current.value = ''
           return
         }
       }
       setFile(file)
     } catch (error) {
       sendAppError(error)
-      if (inputRef.current) inputRef.current.value = ''
-    }
+    } finally { if (inputRef.current) inputRef.current.value = '' }
   }
 
   const handleSendFiles = async () => {
@@ -240,11 +239,14 @@ const Consults = () => {
   const handleSpecialRequest = async () => {
     try {
       setLoadingReport(true)
+      setFileReport({ name:'', data: '' })
+      setDictamenRec({ dictamenName: '', dataBase64: '' })
+      const keyMedia = mediaType.find(media => media.descMedio.includes(tableTitle.split('')[1]))
       const payload = {
         fechaInicio: selectedDates.startDate,
         fechaFin: selectedDates.endDate,
         numeroOtorgante: numOtorgante,
-        estatus: mediaType.filter(media => media.descMedio.includes(tableTitle.split(' ')[1]))[0].claveMedio,
+        estatus: keyMedia ? keyMedia.claveMedio : '',
         tipoOtorgante: type,
         userId: userId
       }
@@ -271,17 +273,22 @@ const Consults = () => {
     try {
       setActiveModal(true)
       setLoadingReport(true)
-      setModalTitle('Dictamen')
+      setSpecialRequest(false)
       setFileReport({ name:'', data: '' })
-      const periodDate = assignPeriodDate({ fechaInicio: selectedDates.startDate }).split('/')
+      setDictamenRec({ dictamenName: '', dataBase64: '' })
+      const periodDate = assignPeriodDate({ fechaInicio: selectedDates.startDate, fechaFin: selectedDates.endDate }).split('-')
+      const defragInitial = periodDate[0].trim().split('/')
+      const defragFinal = periodDate[1].trim().split('/').join('_')
+      setModalTitle(`Dictamen - ${defragInitial.join('_')} a ${defragFinal}`)
+
       const payload = {
         numeroOtorgante: numOtorgante,
-        año: periodDate[1],
-        mes: periodDate[0].toLocaleUpperCase()
+        año: defragInitial[1],
+        mes: defragInitial[0].toLocaleUpperCase()
       }
       const dictamenPromise = dispatch(downloadDictamen.initiate(payload))
       const {data, isSuccess, isError, error} = await dictamenPromise
-      if (isSuccess) setDictamenRec({ dictamenName: 'Dictamen', dataBase64: data })
+      if (isSuccess) setDictamenRec({ dictamenName: `Dictamen_${defragInitial.join('_')}_a_${defragFinal}`, dataBase64: data })
       if (isError) dispatch(SAVE_ERRORS([error]))
     } catch (error) {
       dispatch(SAVE_ERRORS([error]))
@@ -309,6 +316,7 @@ const Consults = () => {
           </Button>
         }))}
         downloadReport={totalTableRows <= 20000 ? handleGetReportTable : () => {
+          setDictamenRec({ dictamenName: '', dataBase64: '' })
           setActiveModal(true)
           setCdcNumber('0')
           setSpecialRequest(true)
@@ -397,7 +405,7 @@ const Consults = () => {
           fileType: ContentType[`${getFileType(file.type)}_TYPE` as keyof typeof ContentType],
           fileGeneralType: S3IDocumentGeneralType.FILE,
           isAudio: auditType === '14',
-          uri: window.URL.createObjectURL(file),
+          uri: globalThis.URL.createObjectURL(file),
         }]} /> : null }
       </section>
     )
@@ -494,8 +502,7 @@ const Consults = () => {
         onAccept={specialRequest ? handleSpecialRequest : handleSendFiles}
         noFooter={uploadLoader || loadingReport || !cdcNumber}
       >
-        {!uploadLoader ? showCustomModalBody() :
-        <Alert className='customFileAlert' type='warning' text={Texts.ACTIVE_LOAD} />}
+        {uploadLoader ? <Alert className='customFileAlert' type='warning' text={Texts.ACTIVE_LOAD} /> : showCustomModalBody() }
       </Modal>
     </>
   )

@@ -40,7 +40,7 @@ const BodyContainer = (props: BodyProps) => {
     link.target = '_blank'
     document.body.appendChild(link)
     link.click()
-    document.body.removeChild(link)
+    link.remove()
     URL.revokeObjectURL(href)
   }
   const handleSendSurvey = async () => {
@@ -86,7 +86,6 @@ const BodyContainer = (props: BodyProps) => {
       })
       console.log({
         user: nameUser,
-        //phone: payload.participants[0].identifyBy.identifier,
         ...callSurvey
       })
     } catch (error) {
@@ -94,19 +93,6 @@ const BodyContainer = (props: BodyProps) => {
     } finally { setSendingSurvey(false); setOpenModal(false) }
   }
   cleanPhoneData()
-/*   const handleModal = () => {
-    setNewPhone(phone)
-    setNewEmail(email)
-    setEditEmail({
-      flag: false,
-      validEmail: emailPattern.test(email)
-    })
-    setEditPhone({
-      flag: false,
-      validPhone: phone.length === 10
-    })
-    setOpenModal(!openModal)
-  } */
   const emailRef = useRef<HTMLInputElement>(null)
   const phoneRef = useRef<HTMLInputElement>(null)
   if (loadingData) return <Loader width={180} height={180} wrapperClass='generalLoader' />
@@ -191,7 +177,7 @@ const BodyContainer = (props: BodyProps) => {
             required
             classNames='customInput'
             onKeyPress={(event: KeyboardEvent) => {
-              if (!/[0-9]/.test(event.key)) {
+              if (!/\d/.test(event.key)) {
                 event.preventDefault();
               }
             }}

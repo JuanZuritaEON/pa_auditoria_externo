@@ -29,7 +29,7 @@ const SubHeaderComponent = (props: SubHeaderTableProps) => {
   
   const filteredItems = () => {
     if (isEmpty(filterText)) return setFilterData(cleanData)
-    const [filtered] = filterValues.map((value) => {
+    const filtered = filterValues.map((value) => {
       const filtered = cleanData.filter((data) => {
         const objectData = data[value]
         const isString = typeof objectData === 'string'
@@ -39,7 +39,7 @@ const SubHeaderComponent = (props: SubHeaderTableProps) => {
         return null
       })
       return filtered
-    }).filter((subArray: any) => subArray.length > 0)
+    }).find((subArray: any) => subArray.length > 0)
     setFilterData(isUndefined(filtered) ? [] : filtered)
   }
   const clearFilter = () => {

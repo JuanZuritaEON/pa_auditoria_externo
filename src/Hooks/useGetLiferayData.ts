@@ -24,8 +24,8 @@ export const useLiferayData = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (window.Liferay) {
-      const Liferay = window.Liferay
+    if (globalThis.Liferay) {
+      const Liferay = globalThis.Liferay
       const userId = Liferay.ThemeDisplay.getUserId()
       const properties = ['CDC_ID_AUD', 'CDC_SEC_AUD', 'CDC_URL_AUD', 'CDC_AWS_AUD', 'CDC_SPW_HDK', 'CDC_WAP_AUD', 'CDC_IFB_AUD', 'CDC_EKY_AUD']
       const initRequest = async () => {

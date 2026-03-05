@@ -28,8 +28,8 @@ const SpecialConsult = () => {
   const actualMonth = new Date(endDate).getMonth() + 1
   const limitedPastFiveYears = new Date()
   limitedPastFiveYears.setFullYear(limitedPastFiveYears.getFullYear() - 5)
-  const [initialDate, setInitialDate] = useState(new Date(startDate.replace(/-/g, '/')))
-  const [finalDate, setFinalDate] = useState(new Date(endDate.replace(/-/g, '/')))
+  const [initialDate, setInitialDate] = useState(new Date(startDate.replaceAll('-', '/')))
+  const [finalDate, setFinalDate] = useState(new Date(endDate.replaceAll('-', '/')))
   const [authSelected, setAuthSelected] = useState('')
   const [activeModal, setActiveModal] = useState(false)
   const [loadingSpecial, setLoadingSpecial] = useState(false)
@@ -91,8 +91,8 @@ const SpecialConsult = () => {
       }
       const { isSuccess, isError, error } = await dispatch(specialConsultNewRequest.initiate(payload))
       if (isSuccess) {
-        setInitialDate(new Date(startDate.replace(/-/g, '/')))
-        setFinalDate(new Date(endDate.replace(/-/g, '/')))
+        setInitialDate(new Date(startDate.replaceAll('-', '/')))
+        setFinalDate(new Date(endDate.replaceAll('-', '/')))
         setAuthSelected('')
         setSubTab('review')
         setLoadingTable(true)
@@ -183,6 +183,10 @@ const SpecialConsult = () => {
       </>
     )
   }
+  const filterMediaType = () => {
+    const filteredMedia = mediaType.find((m:any) =>m.claveMedio === authSelected)
+    return filteredMedia ? filteredMedia.descMedio : ''
+  }
   const showInfoModal = () => {
     if (!loadingSpecial && fileReport.name && fileReport.data && subTab === 'review') return (
       <Button
@@ -206,7 +210,7 @@ const SpecialConsult = () => {
         <div className='verticalSeparator'/>
         <div>
           <Typography typo={'Filtros:'} variant='bold'/>
-          <Typography typo={<>- Autorización - {authSelected ? mediaType.filter((m:any) =>m.claveMedio === authSelected)[0].descMedio : ''}</>} />
+          <Typography typo={<>- Autorización - {authSelected ? filterMediaType() : ''}</>} />
           <Typography typo={<>- Periodo - {assignPeriodDate({
             fechaInicio: dateTransform(initialDate), 
             fechaFin: dateTransform(validateActualDate(finalDate).date)
@@ -291,7 +295,7 @@ const SpecialConsult = () => {
 
   useEffect(() => {
     if (changePeriods.availability) return setSubTabs(prev => {
-      if (prev.filter(tab => tab.id === 'periods').length > 0) return prev
+      if (prev.some(tab => tab.id === 'periods')) return prev
       return [...prev, {
         id: 'periods',
         name: 'Selecciona tu periodo de auditoria',

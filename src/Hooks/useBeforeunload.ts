@@ -19,11 +19,10 @@ export const useBeforeunload = (
     const handleBeforeunload: BeforeunloadHandler = evt => {
       let returnValue;
 
-      if (!activeLoad) {
+      if (activeLoad) { abortMultipartS3.initiate(saveMultipartData)}
+      else {
         returnValue = ''
         return returnValue
-      }else {
-        abortMultipartS3.initiate(saveMultipartData)
       }
     };
 

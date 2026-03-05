@@ -44,10 +44,7 @@ const WidgetContainer = ({
     useGetLoggedUserInfoQuery,
     useGetAllMediaQuery,
     useGetControlFigsQuery,
-    useGetChangePeriodInfoQuery,
-/*     useGetMassiveFileInfoQuery,
-    useGetFluxesInfoQuery,
-    useGetSpecialConsultInfoQuery, */
+    useGetChangePeriodInfoQuery
   } = apiSlice
   const { abortMultipartS3 } = S3Slice.endpoints
 
@@ -115,33 +112,6 @@ const WidgetContainer = ({
   } = useGetChangePeriodInfoQuery({
     numeroOtorgante: consultantNumber
   }, { skip: loadingLoggedUser || hasErrorLoggedUser || loggedUserData.type !== Texts.FINANCIAL})
-/*   const {
-    data: massiveFilsStatusData,
-    isLoading: loadingMassiveFilsStatus,
-    isSuccess: successMassiveFilsStatus,
-    isError: hasErrorMassiveFilsStatus,
-    error: errorMassiveFilsStatus
-  } = useGetMassiveFileInfoQuery({
-    numeroOtorgante: consultantNumber
-  }, { skip: loadingLoggedUser || hasErrorLoggedUser }) */
-/*   const {
-    data: fluxesStatusData,
-    isLoading: loadingFluxesStatus,
-    isSuccess: successFluxesStatus,
-    isError: hasErrorFluxesStatus,
-    error: errorFluxesStatus
-  } = useGetFluxesInfoQuery({
-    numeroOtorgante: consultantNumber
-  }, { skip: loadingLoggedUser || hasErrorLoggedUser})
-  const {
-    data: specialConsultStatusData,
-    isLoading: loadingSpecialConsultStatus,
-    isSuccess: successSpecialConsultStatus,
-    isError: hasErrorSpecialConsultStatus,
-    error: errorSpecialConsultStatus
-  } = useGetSpecialConsultInfoQuery({
-    numeroOtorgante: consultantNumber
-  }, { skip: loadingLoggedUser || hasErrorLoggedUser }) */
 
   useEffect(() => {
     if (loadingLoggedUser) dispatch(SAVE_APP_FLUX({ generalLoader: true }))
@@ -168,7 +138,7 @@ const WidgetContainer = ({
       if (successChangePeriods) {
         dispatch(SAVE_APP_FLUX({ changePeriods: changePeriodsData, noInfoRequest: isEmpty(changePeriodsData.startPeriodDate) }))
         if (changePeriodsData.expirationPeriod) {
-          const daysLeft = parseInt(changePeriodsData.expirationPeriod)
+          const daysLeft = Number.parseInt(changePeriodsData.expirationPeriod)
           const textPlural = daysLeft > 1 ? 'días' : 'día'
           actualDate.setDate((actualDate.getDate() + 1) + daysLeft)
           const componentMessage = () => <GlobalMessage>
@@ -187,25 +157,7 @@ const WidgetContainer = ({
       if (hasErrorChangePeriods) dispatch(SAVE_ERRORS([errorChangePeriods]))
     }
   }, [actualDate, changePeriodsData, loadingChangePeriods, successChangePeriods, hasErrorChangePeriods, errorChangePeriods, dispatch])
-/*   useEffect(() => {
-    if (!loadingMassiveFilsStatus) {
-      if (successMassiveFilsStatus) dispatch(SAVE_APP_FLUX({ statusMassive: massiveFilsStatusData, noInfoRequest: massiveFilsStatusData.length === 0 }))
-      if (hasErrorMassiveFilsStatus) dispatch(SAVE_ERRORS([errorMassiveFilsStatus]))
-    }
-  }, [massiveFilsStatusData, loadingMassiveFilsStatus, successMassiveFilsStatus, hasErrorMassiveFilsStatus, errorMassiveFilsStatus, dispatch])
-  useEffect(() => {
-    if (!loadingFluxesStatus) {
-      if (successFluxesStatus) dispatch(SAVE_APP_FLUX({ fluxes: fluxesStatusData, noInfoRequest: fluxesStatusData.length === 0 }))
-      if (hasErrorFluxesStatus) dispatch(SAVE_ERRORS([errorFluxesStatus]))
-    }
-  }, [fluxesStatusData, loadingFluxesStatus, successFluxesStatus, hasErrorFluxesStatus, errorFluxesStatus, dispatch])
-  useEffect(() => {
-    if (!loadingSpecialConsultStatus) {
-      if (successSpecialConsultStatus) dispatch(SAVE_APP_FLUX({ specialRequestStatus: specialConsultStatusData, noInfoRequest: specialConsultStatusData.length === 0 }))
-      if (hasErrorSpecialConsultStatus) dispatch(SAVE_ERRORS([errorSpecialConsultStatus]))
-    }
-  }, [specialConsultStatusData, loadingSpecialConsultStatus, successSpecialConsultStatus, hasErrorSpecialConsultStatus, errorSpecialConsultStatus, dispatch])
- */
+
   useEffect(() => {
     if (uploadLoader && toastID) toastFunc.update(toastID, { 
       progress: progress,

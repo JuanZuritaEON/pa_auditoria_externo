@@ -11,10 +11,13 @@ const HeaderContainer = (props: HeaderProps) => {
   const actualMonth = actualDate.getMonth() + 1
   const limitedPastFiveYears = new Date()
   limitedPastFiveYears.setFullYear(limitedPastFiveYears.getFullYear() - 5)
-	const [initialDate, setInitialDate] = useState(new Date(startDate.replace(/-/g, '/')))
+	const [initialDate, setInitialDate] = useState(new Date(startDate.replaceAll('-', '/')))
 	const [finalDate, setFinalDate] = useState(actualDate)
   const [period, setPeriod] = useState(startDate)
-  const initialPeriod = useMemo(() => {return periods.filter((period) => period.startDate === startDate)[0]}, [periods, startDate])
+  const initialPeriod = useMemo(() => {
+    const defragPeriod = periods.find((period) => period.startDate === startDate)
+    return defragPeriod ?? {startDate: '', endDate: ''}
+  }, [periods, startDate])
   const handleInitial = (date: Date) => setInitialDate(date)
 	const handleFinal = (date: Date) => {
     const endDate = new Date(date.getFullYear(), date.getMonth() + 1 === actualMonth ? date.getMonth() : date.getMonth() + 1, (date.getMonth() + 1) === actualMonth ? new Date().getDate() : 0)
@@ -41,6 +44,10 @@ const HeaderContainer = (props: HeaderProps) => {
     } catch (error) {
       sendAppError(error)
     } finally { dispatch(SAVE_APP_FLUX({ loadingData: false })) }
+  }
+  const returnEndPeriod = () => {
+    const defragPeriod = periods.find((p) => p.startDate === period)
+    return defragPeriod ? defragPeriod.endDate : ''
   }
 
   return (
@@ -89,7 +96,7 @@ const HeaderContainer = (props: HeaderProps) => {
         disabled={loadingData}
         onClick={() => handleSearch({
           startDate: isCommercial ? dateTransform(initialDate) : period,
-          endDate: isCommercial ? dateTransform(finalDate) : periods.filter((p) => p.startDate === period)[0].endDate
+          endDate: isCommercial ? dateTransform(finalDate) : returnEndPeriod()
         })}
       >
         Buscar

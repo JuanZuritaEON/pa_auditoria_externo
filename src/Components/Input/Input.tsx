@@ -1,6 +1,5 @@
 import { isEmpty } from 'lodash'
 import './Input.css'
-import { getBrowser } from '../../Utils'
 
 const Input = (props: any) => {
   const {
@@ -26,7 +25,6 @@ const Input = (props: any) => {
   const handleChange = ({target}: any) => {
     if (onChange) onChange(target.value)
   }
-  const actualBrowser = getBrowser()
 
   if (isSelect) return (
     <div className={`selectWrap ${classNames}`}>
@@ -34,7 +32,7 @@ const Input = (props: any) => {
         id={id}
         className={`
           ${labelText === 'Periodos' ? 'periodSelect' : ''}
-          selectField${(actualBrowser === 'Chrome' || actualBrowser === 'Edge') ? '' : 'Normal'}
+          selectFieldNormal
           paddingAdded`}
         disabled={disabled}
         title={title}

@@ -153,7 +153,7 @@ const MassiveUpload = () => {
           disabled={!auditType}
           id='fileUpload'
           inputRef={inputRef}
-          label={!isNull(file) ? file.name : 'Elige tu archivo'}
+          label={isNull(file) ? 'Elige tu archivo' : file.name}
           onChange={(files: FileList) => setFile(files[0])}
         />
         <div className='buttonsContent'>

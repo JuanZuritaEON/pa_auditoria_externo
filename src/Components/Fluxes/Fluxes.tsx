@@ -77,7 +77,7 @@ const Fluxes = () => {
     if (isNull(multiFile)) return null
     const docs = multiFile.map(file => {
       return ({
-        uri: window.URL.createObjectURL(file),
+        uri: globalThis.URL.createObjectURL(file),
         fileName: file.name,
         fileType: ContentType[`${getFileType(file.type)}_TYPE` as keyof typeof ContentType],
         fileGeneralType: S3IDocumentGeneralType.FILE
@@ -130,7 +130,7 @@ const Fluxes = () => {
             file,
             {
               numOtorgante: numOtorgante,
-              tipoAuditoria: (parseInt(auditType)+1000).toString(),
+              tipoAuditoria: (Number.parseInt(auditType)+1000).toString(),
               esMasivo: '0',
               folioCDC: '0',
               nombre: file.name
@@ -147,7 +147,7 @@ const Fluxes = () => {
         }
         const s3Promise = dispatch(s3UploadFile.initiate({
           numOtorgante: numOtorgante,
-          tipoAuditoria: (parseInt(auditType)+1000).toString(),
+          tipoAuditoria: (Number.parseInt(auditType)+1000).toString(),
           esMasivo: '0',
           folioCDC: '0',
           nombre: file.name,
@@ -232,7 +232,7 @@ const Fluxes = () => {
         onAccept={handleSendFiles}
         noFooter={uploadLoader}
       >
-        {!uploadLoader ? <section className='fileUploadedModalWindow'>
+        {uploadLoader ? <Alert className='customFileAlert' type='warning' text={Texts.ACTIVE_LOAD} /> : <section className='fileUploadedModalWindow'>
           <Input
             id="auditTypeSelect"
             labelText='Tipo de auditoría'
@@ -260,7 +260,7 @@ const Fluxes = () => {
             onChange={prepareFiles}
           />
           {showDocs()}
-        </section> : <Alert className='customFileAlert' type='warning' text={Texts.ACTIVE_LOAD} />}
+        </section>}
       </Modal>
     </section>
   )

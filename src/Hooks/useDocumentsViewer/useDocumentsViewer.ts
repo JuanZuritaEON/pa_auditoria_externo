@@ -5,13 +5,13 @@ import { ContentType } from '../../Redux'
 import { isEmpty, isNil } from 'lodash'
 import { useZoom } from '../'
 
-const I_DOCUMENTS_WITHOUT_ZOOM = [
+const I_DOCUMENTS_WITHOUT_ZOOM = new Set([
   ContentType.JPEG_TYPE,
   ContentType.JPG_TYPE,
   ContentType.PNG_TYPE,
   ContentType.TIF_TYPE,
   ContentType.TIFF_TYPE
-]
+])
 
 export const useDocumentsViewer = ({
   documents,
@@ -81,7 +81,7 @@ export const useDocumentsViewer = ({
 
       setShowZoom(
         hasFileType &&
-        I_DOCUMENTS_WITHOUT_ZOOM.includes(fileType)
+        I_DOCUMENTS_WITHOUT_ZOOM.has(fileType)
       )
     }
   }, [activeDocument])
