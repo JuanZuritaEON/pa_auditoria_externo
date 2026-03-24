@@ -486,9 +486,9 @@ const Consults = () => {
               classnames={`dictamenButton`}
               onClickAnchor={handleGetDictamen}
             >
-              <Typography typo={'Dictamen'}/>
+              <Typography typo={'Consultar Dictamen'}/>
               <DocumentIcon
-                title={'Dictamen'}
+                title={'Consultar Dictamen'}
                 className='iconStandardStyle'
               />
             </Button>
