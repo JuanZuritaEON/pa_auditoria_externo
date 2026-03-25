@@ -19,7 +19,7 @@ import { isEmpty } from 'lodash'
 import CryptoJS from 'crypto-js'
 
 const mutex = new Mutex()
-const baseUrl = 'http://desarrollo:7002/auditoria-firmas/'
+const baseUrl = ''
 const rawBaseQuery = fetchBaseQuery({ baseUrl })
 const s3BaseQuery = fetchBaseQuery({ baseUrl: '' })
 
@@ -30,13 +30,13 @@ const dynamicBaseQuery: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   await mutex.waitForUnlock()
   let resultBaseQuery
-  if (window.Liferay) {
-    if (window.Liferay?.Session?.get('sessionState') === 'expired') {
+  if (globalThis.Liferay) {
+    if (globalThis.Liferay?.Session?.get('sessionState') === 'expired') {
       sendToastMessage({
         message: 'Su sesión ha expirado por favor vuelva a iniciar sesión.',
         type: 'warning'
       })
-      setTimeout(() => {window.location.reload()}, 5000)
+      setTimeout(() => {globalThis.location.reload()}, 5000)
       return { data: null }
     }
     const {
@@ -110,13 +110,13 @@ const dynamicS3BaseQuery: BaseQueryFn<
       position: 'bottom-right'
     })
   }
-  if (window.Liferay) {
-    if (window.Liferay?.Session?.get('sessionState') === 'expired') {
+  if (globalThis.Liferay) {
+    if (globalThis.Liferay?.Session?.get('sessionState') === 'expired') {
       sendToastMessage({
         message: 'Su sesión ha expirado por favor vuelva a iniciar sesión.',
         type: 'warning'
       })
-      setTimeout(() => {window.location.reload()}, 5000)
+      setTimeout(() => {globalThis.location.reload()}, 5000)
       return { data: null }
     }
     const { app: { appFluxContext: {
@@ -166,7 +166,7 @@ export const apiSlice = createApi({
           email: string;
           telefono: string;
         }[]}, meta, arg) => {
-        if (!response || !response.otorgantes) throw new Error('Ocurrió un error.')
+        if (!response?.otorgantes) throw new Error('Ocurrió un error.')
         let consultant: any[];
         if (response.otorgantes.length === 0) {
           consultant = [{
@@ -371,7 +371,7 @@ export const apiSlice = createApi({
           tipoArchivo: string;
         }[]
       }) => {
-        if (!response || !response.datosCargaMasiva) throw new Error('Ocurrió un error.')
+        if (!response?.datosCargaMasiva) throw new Error('Ocurrió un error.')
         let statusMassive = []
         if (response.datosCargaMasiva.length === 0){
           statusMassive = [{
@@ -769,7 +769,7 @@ export const S3Slice = createApi({
         },
         url: string;
       }, meta, arg) => {
-        if (!response || !response.fields) throw new Error('Ocurrió un error.')
+        if (!response?.fields) throw new Error('Ocurrió un error.')
         const { fields, url } = response
         const formData = new FormData();
         formData.append("Content-Type", fields["Content-Type"]);
@@ -779,13 +779,13 @@ export const S3Slice = createApi({
         formData.append("policy", fields.policy)
         formData.append("signature", fields.signature)
         formData.append("file", arg.file)
-        if (window.Liferay) {
-          if (window.Liferay?.Session?.get('sessionState') === 'expired') {
+        if (globalThis.Liferay) {
+          if (globalThis.Liferay?.Session?.get('sessionState') === 'expired') {
             sendToastMessage({
               message: 'Su sesión ha expirado por favor vuelva a iniciar sesión.',
               type: 'warning'
             })
-            setTimeout(() => {window.location.reload()}, 5000)
+            setTimeout(() => {globalThis.location.reload()}, 5000)
             return
           }
         }
@@ -818,7 +818,7 @@ export const S3Slice = createApi({
         Key: string;
         urls: string[];
       }) => {
-        if (!response || !response.Bucket) throw new Error('Ocurrió un error.')
+        if (!response?.Bucket) throw new Error('Ocurrió un error.')
         return response
       },
       transformErrorResponse: (error: any) => ({
@@ -835,7 +835,7 @@ export const S3Slice = createApi({
         body: chunk
       }),
       transformResponse: (response, meta: any) => {
-        if (!meta)  throw new Error()
+        if (!meta)  throw new Error("No se encontró el eTag.")
         return meta.response.headers.get('etag')
       },
       transformErrorResponse: (error: any) => ({

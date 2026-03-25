@@ -478,7 +478,7 @@ const Consults = () => {
               <Typography typo={formatNumber.format(fig.value)} size='lg' classNames={`${CustomButtonFigsClasses[index]} figureStyle`} />
             </Button>
           ))}
-          {controlFigs.required > 0 ? 
+          { (type === Texts.FINANCIAL && controlFigs.required > 0) ?
             <Button
               size='sm'
               isLink
