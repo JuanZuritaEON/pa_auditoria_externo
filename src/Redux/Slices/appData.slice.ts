@@ -19,7 +19,7 @@ import { isEmpty } from 'lodash'
 import CryptoJS from 'crypto-js'
 
 const mutex = new Mutex()
-const baseUrl = ''
+const baseUrl = 'http://desarrollo:7002/auditoria-firmas/'
 const rawBaseQuery = fetchBaseQuery({ baseUrl })
 const s3BaseQuery = fetchBaseQuery({ baseUrl: '' })
 
