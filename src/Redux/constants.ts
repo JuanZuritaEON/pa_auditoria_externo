@@ -16,7 +16,7 @@ export enum Texts {
   ALERT_FLUX = 'Recuerda subir tu Formato de Autorización por el siguiente medio: "Nueva Carga+ > Firma Autógrafa > Adjuntar Archivo > Enviar."',
   BUTTON_SEARCH = 'Buscar',
   COMMERCIAL = 'COMERCIAL',
-  DEFAULT_CONSULT_NUMBER = '000330',
+  DEFAULT_CONSULT_NUMBER = '000268',
   ERROR_CODE = 'Código de error',
   ERROR_FILE_DOWNLOAD = 'Hubo un error al descargar tu archivo, por favor inténtalo de nuevo.',
   FINANCIAL = 'FINANCIERO',
