@@ -46,7 +46,7 @@ const App = () => {
     })
     if (errors.length > 1) dispatch(SAVE_ERRORS([{
       url: '',
-      code: '',
+      code: 0,
       message: '',
       active: false,
     }]))

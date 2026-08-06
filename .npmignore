@@ -1,1 +1,6 @@
 .liferay.json
+/build.liferay
+package-lock.json
+AuditoriaFirmas-6.1.5.yml
+/.vscode
+/.cursor
