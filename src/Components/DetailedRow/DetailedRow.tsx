@@ -47,7 +47,7 @@ const DetailedRow = ({ data }: any) => {
   return (
     <>
       {
-        !isLoading && (
+        !isLoading && isSuccess &&(
           <section className='detailContainer'>
             <div className='informationRequest'>
               <Typography typo={`- Solicitud: ${detailedData.idRequest}`} size='sm' />

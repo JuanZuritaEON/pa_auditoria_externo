@@ -188,6 +188,15 @@ const SpecialConsult = () => {
     return filteredMedia ? filteredMedia.descMedio : ''
   }
   const showInfoModal = () => {
+    const validateInitialDate = (initial: Date, final: Date) => {
+      const dateModified = new Date(initial)
+      if (initial.getDate() === final.getDate()) {
+        dateModified.setMonth(dateModified.getMonth() - 1)
+        return dateTransform(dateModified)
+      }
+      return dateTransform(dateModified)
+    }
+
     if (!loadingSpecial && fileReport.name && fileReport.data && subTab === 'review') return (
       <Button
         type='button'
@@ -204,7 +213,7 @@ const SpecialConsult = () => {
       <article className='modalData'>
         <div>
           <Typography typo={'Solicitante:'} variant='bold'/>
-          <Typography typo={<>- Lorem</>} />
+          <Typography typo={<>- {nameUser}</>} />
           <Typography typo={<>- {shortName} {numOtorgante} - {companyName}</>} />
         </div>
         <div className='verticalSeparator'/>
@@ -212,7 +221,7 @@ const SpecialConsult = () => {
           <Typography typo={'Filtros:'} variant='bold'/>
           <Typography typo={<>- Autorización - {authSelected ? filterMediaType() : ''}</>} />
           <Typography typo={<>- Periodo - {assignPeriodDate({
-            fechaInicio: dateTransform(initialDate), 
+            fechaInicio: validateInitialDate(initialDate, finalDate), 
             fechaFin: dateTransform(validateActualDate(finalDate).date)
           },true)}</>} />
           {validateActualDate(finalDate).isExactToday ? 

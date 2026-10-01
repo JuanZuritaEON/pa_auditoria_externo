@@ -645,8 +645,71 @@ export const apiSlice = createApi({
         active: true,
       }),
     }),
-    getSpecialDetail: builder.query<any, { idSolicitud: number }>({
-      query: initialLoad => ({
+    getSpecialDetail: builder.query<{
+      requestStatus: string;
+      dateComplete: string;
+      dateFailed: string;
+      beginProcess: string;
+      moreDetails: string;
+      idRequest: number;
+      detailViewFile: boolean;
+      dateExpired: string;
+    }, { idSolicitud: number }>({
+      async queryFn(args, api, extraOptions, fetchWithBQ) {
+        const response = await fetchWithBQ({
+          url: 'especiales/detalle',
+          method: 'POST',
+          body: args
+        })
+
+        if (response.error) return {
+          error: {
+            url: 'especiales/detalle',
+            code: response.error.status,
+            message: typeof response.error.data === 'string' ? response.error.data : JSON.stringify(response.error.data),
+            active: true,
+          } as any
+        }
+
+        const data = response.data as {
+          codigo: number;
+          mensaje: string;
+          success: boolean;
+          detalleSolicitudEsp?: {
+            idSolicitud: number;
+            estatusSolicitud: string;
+            fechaProceso: string;
+            fechaCompletada: string;
+            fechaFallida: string;
+            observaciones: string;
+            visualizarArchivo: boolean;
+            fechaResguardo: string;
+          }
+        }
+
+        if (!data.detalleSolicitudEsp) return {
+          error: {
+            url: 'especiales/detalle',
+            code: 204,
+            message: 'No se encontró la solicitud',
+            active: true,
+          } as any
+        }
+
+        return {
+          data: {
+            requestStatus: data?.detalleSolicitudEsp?.estatusSolicitud ?? '',
+            dateComplete: data?.detalleSolicitudEsp?.fechaCompletada ?? '',
+            dateFailed: data?.detalleSolicitudEsp?.fechaFallida ?? '',
+            beginProcess: data?.detalleSolicitudEsp?.fechaProceso ?? '',
+            moreDetails: data?.detalleSolicitudEsp?.observaciones ?? '',
+            idRequest: data?.detalleSolicitudEsp?.idSolicitud ?? 0,
+            detailViewFile: data?.detalleSolicitudEsp?.visualizarArchivo ?? false,
+            dateExpired: data?.detalleSolicitudEsp?.fechaResguardo ?? ''
+          }
+        }
+      }
+/*       query: initialLoad => ({
         url: 'especiales/detalle',
         method: 'POST',
         body: initialLoad
@@ -663,24 +726,26 @@ export const apiSlice = createApi({
           fechaResguardo: string;
         }
       }) => {
-        if (!res) return new Error('Ocurrió un error')
-        return {
-          requestStatus: res.detalleSolicitudEsp.estatusSolicitud ?? '',
-          dateComplete: res.detalleSolicitudEsp.fechaCompletada ?? '',
-          dateFailed: res.detalleSolicitudEsp.fechaFallida ?? '',
-          beginProcess: res.detalleSolicitudEsp.fechaProceso ?? '',
-          moreDetails: res.detalleSolicitudEsp.observaciones ?? '',
-          idRequest: res.detalleSolicitudEsp.idSolicitud ?? 0,
-          detailViewFile: res.detalleSolicitudEsp.visualizarArchivo ?? false,
-          dateExpired: res.detalleSolicitudEsp.fechaResguardo ?? ''
-        }
+        throw new Error('Ocurrió un error')
+        if (res.detalleSolicitudEsp)
+          return {
+            requestStatus: res.detalleSolicitudEsp.estatusSolicitud ?? '',
+            dateComplete: res.detalleSolicitudEsp.fechaCompletada ?? '',
+            dateFailed: res.detalleSolicitudEsp.fechaFallida ?? '',
+            beginProcess: res.detalleSolicitudEsp.fechaProceso ?? '',
+            moreDetails: res.detalleSolicitudEsp.observaciones ?? '',
+            idRequest: res.detalleSolicitudEsp.idSolicitud ?? 0,
+            detailViewFile: res.detalleSolicitudEsp.visualizarArchivo ?? false,
+            dateExpired: res.detalleSolicitudEsp.fechaResguardo ?? ''
+          }
+        else return new Error('No se encontró la solicitud')
       },
       transformErrorResponse: (error: any) => ({
         url: 'especiales/detalle',
         code: error.status,
         message: error?.error ?? error?.data?.error ?? error?.data?.mensaje ?? error?.data?.errores[0]?.mensaje ?? error?.data?.mensajes[0],
         active: true,
-      }),
+      }), */
     }),
     downloadConsultsReport: builder.query<any, {numeroOtorgante: string;fechaInicio: string;fechaFin: string;estatus: string;tipoOtorgante: string;}>({
       query: initialLoad => ({

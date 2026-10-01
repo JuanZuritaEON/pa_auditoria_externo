@@ -64,6 +64,7 @@ const WidgetContainer = ({
     const isCommercial = (type === Texts.COMMERCIAL || type === Texts.REPAIRER)
     const initialDate = isCommercial ? formatDate(initialMonthDate) : periods.startDate
     const endDate = isCommercial ? formatDate(actualDate) : periods.endDate
+
     setInitialDates({
       startDate: initialDate,
       endDate: endDate
