@@ -190,7 +190,7 @@ const SpecialConsult = () => {
   const showInfoModal = () => {
     const validateInitialDate = (initial: Date, final: Date) => {
       const dateModified = new Date(initial)
-      if (initial.getDate() === final.getDate()) {
+      if ((initial.getDate() === final.getDate()) && (initial.getMonth() === final.getMonth())) {
         dateModified.setMonth(dateModified.getMonth() - 1)
         return dateTransform(dateModified)
       }
